@@ -1,0 +1,46 @@
+<table>
+  <thead>
+    <tr>
+      <th>
+        Title        
+      </th>
+      <th>
+        Craigslist Price
+      </th>
+      <th>
+        Edmunds Price
+      </th>
+      <th>
+        Margin
+      </th>
+      <th>
+        Hide this car (forever)
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @deals.each do |deal| %>
+      <tr>
+        <td>
+          <a href="<%= deal.href %>">
+            <%= deal.title_text%>
+          </a>         
+        </td>
+        <td>
+          <%= deal.cl_price %>
+        </td>
+        <td>
+          <%= deal.ed_price %>
+        </td>
+        <td>
+          <%= deal.ed_price - deal.cl_price %>
+        </td>
+        <td>
+          <a href="hide/<%= deal.id%>">
+            Hide
+          </a>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
