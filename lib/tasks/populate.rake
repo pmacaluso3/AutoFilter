@@ -1,5 +1,5 @@
 namespace :populate do
   task :edmunds => :environment do
-    EdmundsPopulator::populate!
+    EdmundsPopulator.populate!
   end
 end
