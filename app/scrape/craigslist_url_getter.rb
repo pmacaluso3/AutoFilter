@@ -38,7 +38,6 @@ class CraigslistUrlGetter
             this_car.save!
           end
         rescue NoMethodError => e
-          binding.pry
           Rails.logger.warn e.inspect
           if Car.where(cl_pid: link[:cl_pid]).empty?
             this_car = Car.new(link)
