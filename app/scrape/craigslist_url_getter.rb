@@ -58,7 +58,6 @@ class CraigslistUrlGetter
       else
         car.hide
       end
-      binding.pry if car.ed_price == nil
     end
   end
 end
