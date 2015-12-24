@@ -41,7 +41,7 @@ class CraigslistUrlGetter
           Rails.logger.warn e.inspect
           if Car.where(cl_pid: link[:cl_pid]).empty?
             this_car = Car.new(link)
-            this_car.hidden = true
+            this_car.hide
             this_car.save!              
           end          
         end
@@ -53,7 +53,12 @@ class CraigslistUrlGetter
       scraper = args[:scraper]
       car.cl_ymm = scraper.scrape_ymm
       CraigslistCarProcessor.process_ymm(car) # car now has ed make, model, and year
-      RushPricer.min_price(car)
+      if (price = RushPricer.min_price(car))
+        car.ed_price = price
+      else
+        car.hide
+      end
+      binding.pry if car.ed_price == nil
     end
   end
 end
