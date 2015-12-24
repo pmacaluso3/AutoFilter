@@ -9,9 +9,7 @@ class CraigslistUrlGetter
     CL_URL = "https://tampa.craigslist.org/search/cto"
 
     def get_links(url = CL_URL)
-      puts "started getting links"
       response = HTTParty.get(CL_URL)
-      puts "got a response"
       rows = Nokogiri::HTML(response).css(".row")
       rows.map do |row|
         hdrlnk = row.css(".hdrlnk").first
@@ -40,6 +38,7 @@ class CraigslistUrlGetter
             this_car.save!
           end
         rescue NoMethodError => e
+          binding.pry
           Rails.logger.warn e.inspect
           if Car.where(cl_pid: link[:cl_pid]).empty?
             this_car = Car.new(link)
