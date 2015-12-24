@@ -1,6 +1,8 @@
+<% gray = true %>
 <table>
   <thead>
-    <tr>
+    <tr class='<%= gray ? "gray" : "" %>'>
+    <% gray = !gray %>
       <th>
         Title        
       </th>
@@ -20,7 +22,8 @@
   </thead>
   <tbody>
     <% @deals.each do |deal| %>
-      <tr>
+      <tr class='<%= gray ? "gray" : "" %>'>
+      <% gray = !gray %>
         <td>
           <a href="<%= deal.href %>">
             <%= deal.title_text%>
