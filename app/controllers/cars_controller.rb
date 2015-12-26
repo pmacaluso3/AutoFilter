@@ -1,8 +1,8 @@
 class CarsController < ApplicationController
   def index
-    @deals = Car.where(hidden: false).select do |car|
+    @deals = Car.order('updated_at desc').limit(500).where(hidden: false).select do |car|
       car.ed_price - car.cl_price > 1000 && car.cl_price > 100
-    end
+    end[0..39]
   end
 
   def hide
