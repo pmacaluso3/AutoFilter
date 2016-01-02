@@ -7,7 +7,7 @@ namespace :constantly do
   task :cull => :environment do
     Car.hidden.destroy_all
     Car.visible.select do |car|
-      car.ed_price - car.cl_price < 1000
+      (car.created_at < Time.now - 7.days) || (car.ed_price - car.cl_price < 1000)
     end.destroy_all
   end
 end
